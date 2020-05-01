@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Timers;
 using TravelMonkey.Data;
 using TravelMonkey.Models;
+using TravelMonkey.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -12,7 +13,8 @@ namespace TravelMonkey.ViewModels
     {
         private readonly Timer _slideShowTimer = new Timer(5000);
 
-        public List<Destination> Destinations => MockDataStore.Destinations;
+        public List<Destination> Destinations => MockDataStore.TopDestinations;
+        public List<string> Countries => MockDataStore.Countries;
         public ObservableCollection<PictureEntry> Pictures => MockDataStore.Pictures;
 
         private Destination _currentDestination;
@@ -22,15 +24,10 @@ namespace TravelMonkey.ViewModels
             set => Set(ref _currentDestination, value);
         }
 
-        public Command<string> OpenUrlCommand { get; } = new Command<string>(async (url) =>
+        public Command<string> GoToDestinationPageCommand { get; } = new Command<string>(async (destination) =>
         {
-            if (!string.IsNullOrWhiteSpace(url))
-                await Browser.OpenAsync(url, options: new BrowserLaunchOptions
-                {
-                    Flags = BrowserLaunchFlags.PresentAsFormSheet,
-                    PreferredToolbarColor = Color.SteelBlue,
-                    PreferredControlColor = Color.White
-                });
+            if (!string.IsNullOrWhiteSpace(destination))
+                await Application.Current.MainPage.Navigation.PushModalAsync(new DestinationResultPage(destination));
         });
 
         public MainPageViewModel()

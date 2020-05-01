@@ -41,4 +41,17 @@
         public int[] SrcSentLen { get; set; }
         public int[] TransSentLen { get; set; }
     }
+
+    public class AvailableTranslation
+    {
+        public string InputLanguage { get; set; }
+
+        public string InputText { get; set; }
+
+        public string TranslatedLanguageKey { get; set; }
+
+        public string TranslatedLanguageName { get; set; }
+
+        public string TranslatedLanguageText { get; set; }
+    }
 }

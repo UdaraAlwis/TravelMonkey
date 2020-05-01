@@ -1,26 +1,61 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TravelMonkey.Views.AddPicturePage" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" xmlns:effect="clr-namespace:TravelMonkey.Effects" Title="Add Picture">
-    <yummy:PancakeView BackgroundGradientStartColor="{Binding PictureAccentColor}" BackgroundGradientEndColor="LightGray" BackgroundGradientAngle="40">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TravelMonkey.Views.AddPicturePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effect="clr-namespace:TravelMonkey.Effects"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    Title="Add Picture">
+    <yummy:PancakeView
+        BackgroundGradientAngle="40"
+        BackgroundGradientEndColor="{Binding PictureAccentColor}"
+        BackgroundGradientStartColor="#d9d9d9">
         <yummy:PancakeView.Effects>
             <effect:SafeAreaPaddingEffect />
         </yummy:PancakeView.Effects>
-        <Grid Margin="7">
+
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Button Grid.Row="0" Text="Close" Clicked="Button_Clicked" HorizontalOptions="Center" FontFamily="LatoBold" TextColor="White" />
 
-            <yummy:PancakeView Grid.Row="1" Padding="0" BorderColor="#44FFFFFF" CornerRadius="10" BorderThickness="2">
+            <Button
+                Grid.Row="0"
+                BackgroundColor="White"
+                Clicked="Button_Clicked"
+                FontFamily="LatoBold"
+                HorizontalOptions="FillAndExpand"
+                Text="Close" />
+
+            <yummy:PancakeView
+                Grid.Row="1"
+                Padding="0"
+                BorderColor="#d9d9d9"
+                BorderThickness="2"
+                CornerRadius="10">
                 <Grid>
-                    <Image HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding ShowPhoto}" Source="{Binding PhotoSource}" Aspect="AspectFill">
+                    <Image
+                        Aspect="AspectFill"
+                        HorizontalOptions="Fill"
+                        IsVisible="{Binding ShowPhoto}"
+                        Source="{Binding PhotoSource}"
+                        VerticalOptions="Fill">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding TakePhotoCommand}" />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Label Text="Tap to add picture" TextColor="White" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="Fill" VerticalOptions="Fill" IsVisible="{Binding ShowImagePlaceholder}" FontSize="Large" FontFamily="LatoRegular">
+                    <Label
+                        FontFamily="LatoRegular"
+                        FontSize="Large"
+                        HorizontalOptions="Fill"
+                        HorizontalTextAlignment="Center"
+                        IsVisible="{Binding ShowImagePlaceholder}"
+                        Text="Tap to add picture"
+                        VerticalOptions="Fill"
+                        VerticalTextAlignment="Center">
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding TakePhotoCommand}" />
                         </Label.GestureRecognizers>
@@ -28,14 +63,31 @@
                 </Grid>
             </yummy:PancakeView>
 
-            <yummy:PancakeView Grid.Row="2" BackgroundColor="#44FFFFFF" CornerRadius="5" Padding="2">
-                <Label Text="{Binding PictureDescription}" HorizontalTextAlignment="Center" />
+            <yummy:PancakeView
+                Grid.Row="2"
+                Padding="2"
+                BackgroundColor="{Binding PictureAccentColor}"
+                CornerRadius="5">
+                <Label HorizontalTextAlignment="Center" Text="{Binding PictureDescription}" />
             </yummy:PancakeView>
 
-            <Button Grid.Row="3" Text="Add Picture" FontAttributes="Bold" BackgroundColor="{Binding PictureAccentColor}" TextColor="White" Command="{Binding AddPictureCommand}" />
+            <Button
+                Grid.Row="3"
+                BackgroundColor="{Binding PictureAccentColor}"
+                Command="{Binding AddPictureCommand}"
+                FontAttributes="Bold"
+                Text="Add Picture" />
 
-            <Grid Grid.RowSpan="4" IsVisible="{Binding IsPosting}" BackgroundColor="#B0000000" Margin="-7">
-                <ActivityIndicator IsRunning="true" HorizontalOptions="Center" VerticalOptions="Center" Color="White" />
+            <Grid
+                Grid.RowSpan="4"
+                Margin="-7"
+                BackgroundColor="#B0000000"
+                IsVisible="{Binding IsPosting}">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="true"
+                    VerticalOptions="Center"
+                    Color="White" />
             </Grid>
         </Grid>
     </yummy:PancakeView>

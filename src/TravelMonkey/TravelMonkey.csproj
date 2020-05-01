@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -22,13 +22,9 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Resources\Fonts\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
     <Folder Include="Effects\" />
-    <Folder Include="Views\" />
     <Folder Include="Services\" />
     <Folder Include="Data\" />
-    <Folder Include="Models\CognitiveServices\" />
     <Folder Include="Converters\" />
   </ItemGroup>
   <ItemGroup>
@@ -46,9 +42,20 @@
     <EmbeddedResource Include="Resources\Fonts\fa-solid.otf" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\LangaugeSelectorPage.xaml.cs">
+      <DependentUpon>LangaugeSelectorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\DestinationResultPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LangaugeSelectorPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

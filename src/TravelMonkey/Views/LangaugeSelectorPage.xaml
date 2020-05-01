@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="TravelMonkey.Views.LangaugeSelectorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+    xmlns:effect="clr-namespace:TravelMonkey.Effects"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    mc:Ignorable="d">
+    <ContentPage.Content>
+        <yummy:PancakeView
+            BackgroundGradientAngle="40"
+            BackgroundGradientEndColor="White"
+            BackgroundGradientStartColor="#d9d9d9">
+            <yummy:PancakeView.Effects>
+                <effect:SafeAreaPaddingEffect />
+            </yummy:PancakeView.Effects>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button
+                    Grid.Row="0"
+                    BackgroundColor="White"
+                    Clicked="Button_Clicked"
+                    FontFamily="LatoBold"
+                    HorizontalOptions="FillAndExpand"
+                    Text="Done" />
+
+                <ScrollView Grid.Row="1">
+                    <StackLayout Padding="10" BindableLayout.ItemsSource="{Binding AvailableLanguages}">
+                        <BindableLayout.EmptyViewTemplate>
+                            <DataTemplate>
+                                <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                    <Label
+                                        FontFamily="LatoRegular"
+                                        FontSize="15"
+                                        HorizontalTextAlignment="Center"
+                                        VerticalTextAlignment="Center">
+                                        No bueno translationo 🤷‍♀️
+                                    </Label>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.EmptyViewTemplate>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <yummy:PancakeView
+                                    Margin="7"
+                                    BackgroundColor="White"
+                                    CornerRadius="10"
+                                    HasShadow="True">
+                                    <Grid Margin="10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="0.25*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <Switch
+                                            Grid.Row="0"
+                                            Grid.RowSpan="2"
+                                            Grid.Column="0"
+                                            IsToggled="{Binding IsSelected}"
+                                            Toggled="Switch_Toggled"
+                                            VerticalOptions="Center" />
+
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            FontFamily="LatoBold"
+                                            FontSize="Small"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding Name}" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="1"
+                                            FontFamily="LatoRegular"
+                                            FontSize="20"
+                                            HorizontalOptions="Start"
+                                            Text="{Binding NativeName}" />
+                                    </Grid>
+                                </yummy:PancakeView>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
+
+            </Grid>
+        </yummy:PancakeView>
+    </ContentPage.Content>
+</ContentPage>

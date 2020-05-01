@@ -1,4 +1,6 @@
-﻿namespace TravelMonkey.Models
+﻿using System.Collections.Generic;
+
+namespace TravelMonkey.Models
 {
     public class Destination
     {

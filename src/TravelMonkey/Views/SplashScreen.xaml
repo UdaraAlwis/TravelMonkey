@@ -1,7 +1,15 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="TravelMonkey.Views.SplashScreen">
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TravelMonkey.Views.SplashScreen"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Grid BackgroundColor="White">
-        <Image x:Name="logo" Source="TravelMonkey.png" VerticalOptions="Center"
-                        HorizontalOptions="Center" WidthRequest="148" HeightRequest="148"  />
+        <Image
+            x:Name="logo"
+            HeightRequest="148"
+            HorizontalOptions="Center"
+            Source="TravelMonkey.png"
+            VerticalOptions="Center"
+            WidthRequest="148" />
     </Grid>
 </ContentPage>

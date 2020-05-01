@@ -1,33 +1,71 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:effect="clr-namespace:TravelMonkey.Effects" xmlns:converters="clr-namespace:TravelMonkey.Converters" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView" x:Class="TravelMonkey.Views.TranslationResultPage" BackgroundColor="#F3F3F3">
-    <ContentPage.Resources>
-        <converters:LanguageCodeToDescriptionConverter x:Key="LanguageCodeToDescriptionConverter" />
-    </ContentPage.Resources>
-    <yummy:PancakeView BackgroundGradientStartColor="SteelBlue" BackgroundGradientEndColor="LightGray" BackgroundGradientAngle="40">
-        <StackLayout>
-            <StackLayout.Effects>
-                <effect:SafeAreaPaddingEffect />
-            </StackLayout.Effects>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="TravelMonkey.Views.TranslationResultPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:effect="clr-namespace:TravelMonkey.Effects"
+    xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+    BackgroundColor="#F3F3F3">
+    <yummy:PancakeView
+        BackgroundGradientAngle="40"
+        BackgroundGradientEndColor="White"
+        BackgroundGradientStartColor="#d9d9d9">
+        <yummy:PancakeView.Effects>
+            <effect:SafeAreaPaddingEffect />
+        </yummy:PancakeView.Effects>
 
-            <Button Text="Close" Clicked="Button_Clicked" HorizontalOptions="Center" FontFamily="LatoBold" TextColor="White" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <Entry Margin="15,0" Text="{Binding InputText, Mode=OneWay}" ReturnCommand="{Binding TranslateTextCommand}" ReturnCommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}" FontSize="20" FontFamily="LatoRegular" BackgroundColor="Transparent" Placeholder="Enter text to translate" />
+            <Button
+                Grid.Row="0"
+                BackgroundColor="White"
+                Clicked="Button_Clicked"
+                FontFamily="LatoBold"
+                HorizontalOptions="FillAndExpand"
+                Text="Close" />
 
-            <ScrollView>
-                <StackLayout BindableLayout.ItemsSource="{Binding Translations}" Padding="10">
+            <Entry
+                Grid.Row="1"
+                Margin="15,0"
+                BackgroundColor="Transparent"
+                FontFamily="LatoRegular"
+                FontSize="20"
+                Placeholder="Enter text to translate"
+                ReturnCommand="{Binding TranslateTextCommand}"
+                ReturnCommandParameter="{Binding Text, Source={RelativeSource Mode=Self}}"
+                Text="{Binding InputText, Mode=OneWay}" />
+
+            <ScrollView Grid.Row="2">
+                <StackLayout Padding="10" BindableLayout.ItemsSource="{Binding Translations}">
                     <BindableLayout.EmptyViewTemplate>
                         <DataTemplate>
-                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-                                <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontFamily="LatoRegular" FontSize="15">No bueno translationo 🤷‍♀️</Label>
+                            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                                <Label
+                                    FontFamily="LatoRegular"
+                                    FontSize="15"
+                                    HorizontalTextAlignment="Center"
+                                    VerticalTextAlignment="Center">
+                                    No bueno translationo 🤷‍♀️
+                                </Label>
                             </Grid>
                         </DataTemplate>
                     </BindableLayout.EmptyViewTemplate>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <yummy:PancakeView BackgroundColor="White" Margin="7" CornerRadius="10" HasShadow="True">
+                            <yummy:PancakeView
+                                Margin="7"
+                                BackgroundColor="White"
+                                CornerRadius="10"
+                                HasShadow="True">
                                 <Grid Margin="10">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="0.17*" />
+                                        <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
 
@@ -35,15 +73,60 @@
                                         <RowDefinition Height="*" />
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Image Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Source="{Binding Key, StringFormat='{0}.png'}" WidthRequest="40" HorizontalOptions="Start" />
-                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding Key, Converter={StaticResource LanguageCodeToDescriptionConverter}, ConverterParameter={Binding Key}}" FontFamily="LatoBold" FontSize="Small" VerticalOptions="End" />
-                                    <Label Grid.Column="1" Grid.Row="1" Text="{Binding Value}" FontFamily="LatoRegular" FontSize="20" />
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontFamily="LatoBold"
+                                        FontSize="Small"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding TranslatedLanguageName}" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        FontFamily="LatoRegular"
+                                        FontSize="20"
+                                        HorizontalOptions="Start"
+                                        Text="{Binding TranslatedLanguageText}" />
+
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.RowSpan="2"
+                                        Grid.Column="1"
+                                        FontAttributes="Bold"
+                                        FontFamily="LatoBold"
+                                        FontSize="20"
+                                        HorizontalOptions="End"
+                                        Text="{Binding TranslatedLanguageKey}"
+                                        VerticalOptions="CenterAndExpand" />
                                 </Grid>
                             </yummy:PancakeView>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
-        </StackLayout>
+
+            <Button
+                Grid.Row="3"
+                BackgroundColor="White"
+                Clicked="SelectLanguagesButton_Clicked"
+                FontFamily="LatoBold"
+                HorizontalOptions="FillAndExpand"
+                Text="Select Languages"
+                VerticalOptions="EndAndExpand" />
+
+            <Grid
+                Grid.Row="0"
+                Grid.RowSpan="4"
+                Margin="-7"
+                BackgroundColor="#B0000000"
+                IsVisible="{Binding IsBusy}">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="true"
+                    VerticalOptions="Center"
+                    Color="White" />
+            </Grid>
+        </Grid>
     </yummy:PancakeView>
 </ContentPage>

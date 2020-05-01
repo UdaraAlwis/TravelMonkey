@@ -38,7 +38,7 @@ namespace TravelMonkey.ViewModels
             set => Set(ref _isPosting, value);
         }
 
-        private Color _pictureAccentColor = Color.SteelBlue;
+        private Color _pictureAccentColor = Color.White;
         public Color PictureAccentColor
         {
             get => _pictureAccentColor;
@@ -59,10 +59,10 @@ namespace TravelMonkey.ViewModels
         {
             TakePhotoCommand = new Command(async () => await TakePhoto());
             AddPictureCommand = new Command(() =>
-             {
-                 MockDataStore.Pictures.Add(new PictureEntry { Description = _pictureDescription, Image = _photoSource });
-                 MessagingCenter.Send(this, Constants.PictureAddedMessage);
-             });
+            {
+                MockDataStore.Pictures.Add(new PictureEntry { Description = _pictureDescription, Image = _photoSource });
+                MessagingCenter.Send(this, Constants.PictureAddedMessage);
+            });
         }
 
         private async Task TakePhoto()

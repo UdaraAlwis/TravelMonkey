@@ -23,7 +23,7 @@ namespace TravelMonkey.Views
             StartPulseAnimation();
         }
 
-        void StartPulseAnimation()
+        private void StartPulseAnimation()
         {
             var animation = new Animation();
 
@@ -39,7 +39,7 @@ namespace TravelMonkey.Views
 
         private async void InitializeData()
         {
-            MockDataStore.Destinations = await _bingSearchService.GetDestinations();
+            MockDataStore.TopDestinations = await _bingSearchService.GetTopDestinationList();
 
             await MainThread.InvokeOnMainThreadAsync(AnimateTransition);
 
@@ -49,10 +49,15 @@ namespace TravelMonkey.Views
         private async Task AnimateTransition()
         {
             // To at least show the pulse animation. Give a feeling that we're loading the app.
-            await Task.Delay(2500);
+            await Task.Delay(1000);
 
             // Explode the logo and fade to white, which is what the incoming page comes up as.
-            var explodeImageTask = Task.WhenAll(Content.ScaleTo(100, 500, Easing.CubicOut), Content.FadeTo(0, 250, Easing.CubicInOut));
+            // UdaraAlwis - NO! that looks horrible! please try this out instead,
+            // Scaling up smoothly upto 5x and Fading out as the next page comes up.
+            var explodeImageTask = Task.WhenAll(
+                Content.ScaleTo(5, 300, Easing.CubicOut),
+                Content.FadeTo(0, 300, Easing.CubicInOut));
+
             BackgroundColor = Color.White;
             await explodeImageTask;
         }

@@ -47,5 +47,10 @@ namespace TravelMonkey.Views
             await Navigation.PushModalAsync(new TranslationResultPage(TranslateTextEntry.Text));
             TranslateTextEntry.Text = "";
         }
+
+        private async void Picker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            await Navigation.PushModalAsync(new DestinationResultPage(DestinationPicker.SelectedItem.ToString()));
+        }
     }
 }
